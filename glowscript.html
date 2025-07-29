@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GlowScript Embedded Example</title>
+  <title>GlowScript Animation</title>
 
   <!-- GlowScript CSS -->
   <link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
@@ -17,32 +17,32 @@
 </head>
 <body>
 
-  <div id="glowscript" class="glowscript">
-    <!-- Your GlowScript canvas will appear here -->
-  </div>
+  <div id="glowscript" class="glowscript"></div>
 
   <script type="text/javascript">
-    // Paste your GlowScript code here, wrapped in an async function
-    
     (async function() {
-      // Your GlowScript code adapted from your snippet
-      // The key part is defining and running __main__()
+      // Setup scene
+      let scene = new glow.Canvas();
 
-      async function __main__() {
-        const vector = vec;
-        const sphere = vp_sphere;
-        const canvas = new glow.Canvas();
+      // Create a sphere
+      let ball = new vp_sphere({
+        pos: vec(0, 0, 0),
+        radius: 1,
+        color: vec(0, 0.7, 0.7),
+        make_trail: true,
+        retain: 50
+      });
 
-        // Example: create a single green sphere at origin
-        const ball = sphere({pos: vector(0,0,0), radius: 1, color: vector(0, 0.9, 0)});
-
-        // Your original code has a more complicated simulation,
-        // so you'd adapt your full code inside this __main__ function.
+      // Animate rotation
+      let angle = 0;
+      function animate() {
+        angle += 0.01;
+        ball.pos = vec(Math.cos(angle)*2, 0, Math.sin(angle)*2);
+        requestAnimationFrame(animate);
       }
-
-      // Run the GlowScript main function
-      await __main__();
+      animate();
     })();
   </script>
 </body>
 </html>
+
