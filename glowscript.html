@@ -1,48 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GlowScript Animation</title>
-
-  <!-- GlowScript CSS -->
-  <link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
-  <link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
-
-  <!-- GlowScript JS libs -->
-  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
-  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.2.9.min.js"></script>
-  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.2.9.min.js"></script>
+  <title>GlowScript Minimal</title>
+  <script src="https://s3.amazonaws.com/glowscript/package/glow.min.js"></script>
 </head>
 <body>
-
-  <div id="glowscript" class="glowscript"></div>
-
-  <script type="text/javascript">
-    (async function() {
-      // Setup scene
-      let scene = new glow.Canvas();
-
-      // Create a sphere
-      let ball = new vp_sphere({
-        pos: vec(0, 0, 0),
-        radius: 1,
-        color: vec(0, 0.7, 0.7),
-        make_trail: true,
-        retain: 50
-      });
-
-      // Animate rotation
-      let angle = 0;
-      function animate() {
-        angle += 0.01;
-        ball.pos = vec(Math.cos(angle)*2, 0, Math.sin(angle)*2);
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
+  <canvas id="glowscript-canvas" width="600" height="400"></canvas>
+  <script>
+    let canvas = new glow.Canvas('glowscript-canvas');
+    let sphere = new glow.vp_sphere({pos: glow.vec(0,0,0), radius:1, color: glow.vec(1,0,0)});
   </script>
 </body>
 </html>
-
